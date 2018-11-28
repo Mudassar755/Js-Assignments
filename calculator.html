@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="calculator">
+        <div class="top">
+
+            <div class="screen" id="result"></div>
+            <div id="clear" class="keys" onclick="calculate(this.innerText)" ;>C</div>
+        </div>
+        <div class="key">
+
+            <div class="keys" onclick="calculate(this.innerText)" ;>1</div>
+            <div class="keys" onclick="calculate(this.innerText)" ;>2</div>
+            <div class="keys" onclick="calculate(this.innerText)" ;>3</div>
+            <div class="operator" onclick="calculate(this.innerText)" ;>+</div>
+            <div class="keys" onclick="calculate(this.innerText)" ;>4</div>
+            <div class="keys" onclick="calculate(this.innerText)" ;>5</div>
+            <div class="keys" onclick="calculate(this.innerText)" ;>6</div>
+            <div class="operator" onclick="calculate(this.innerText)";>-</div>
+            <div class="keys" onclick="calculate(this.innerText)" ;>7</div>
+            <div class="keys" onclick="calculate(this.innerText)" ;>8</div>
+            <div class="keys" onclick="calculate(this.innerText)" ;>9</div>
+            <div class="operator" onclick="calculate(this.innerText)">/</div>
+            <div class="keys" onclick="calculate(this.innerText)" ;>0</div>
+            <div class="keys" onclick="calculate(this.innerText)" ;>.</div>
+
+            <div class="operator" onclick="calculate(this.innerText)">*</div>
+            <div class="equal" onclick="calculate('=')" ;>=</div>
+
+        </div>
+    </div>
+</body>
+<script>
+    let calculationDone = false;
+    let allowOperators = "+-*/%=.Enterc";
+    //execute on pressing any key from keyboard
+    document.onkeydown = function (event) {
+        console.log(event.key)
+        //check pressed key is number or not a number     
+        if (isNaN(event.key)) {
+            //allowe the operators                
+            if (allowOperators.indexOf(event.key) == -1) {
+                return;
+            }
+        }
+
+        //on preesing "=" sign evaluate result
+
+        if (event.key == '=' || event.key == 'Enter'){
+            // calculation has done and                         
+            calculationDone = true;
+            //show the the result on screen                     
+            result.innerText = eval(result.innerText);
+            
+        }
+       
+        else {
+
+            if(event.key == 'c'){
+                result.innerText = 0;
+                return;
+            }
+
+            //if previous calculation has done
+            if (calculationDone) {
+                // empty result screen                    
+                result.innerText = '';
+                calculationDone = false;
+
+            }
+            result.innerText += event.key;
+        }
+    }
+
+    function calculate(value) {
+
+        
+
+        if (value == '=') {
+
+            result.innerText = eval(result.innerText)
+
+            
+        }
+        else if (value == 'C') {
+            result.innerText = "";
+
+        }
+        else {
+            document.getElementById('result').innerText += value;
+
+        }
+
+    }
+</script>
+
+</html>

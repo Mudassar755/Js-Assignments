@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+   
+    </style>
+</head>
+<body>
+    <table border="1px" cellpadding='5' cellspacing='5'>
+        
+        <tbody>
+            <tr>
+                <td>Biryani</td>
+                <td><input type="checkbox" class="dish"  name="" id=""></td>
+                <td>150</td>
+                <td><input type="number"  name="" id="" value="1"></td>
+            </tr>
+            <tr>
+                <td>Mutton</td>
+                <td><input type="checkbox" class="dish" name="" id=""></td>
+                <td>500</td>
+                <td><input type="number" name="" id="" value="1"></td>
+            </tr>
+            <tr>
+                <td>Chickrn</td>
+                <td><input type="checkbox" class="dish"  name="" id=""></td>
+                <td>300</td>
+                <td><input type="number" name="" id="" value="1"></td>
+            </tr>
+            <tr>
+                <td>Samoosa</td>
+                <td><input type="checkbox" class="dish"  name="" id=""></td>
+                <td>30</td>
+                <td><input type="number" name="" id="" value="1"></td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr class="totalBill">
+                <td><button onclick="calculateBill()";>Calculate</button></td>
+                <td colspan="3"><b><div id="bill" >0</div></b></td>
+                
+            </tr>
+           
+            <!-- <tr class="totalBill">
+                    <td>Bill After Dicount</td>
+                    <td colspan="3"><div id="billOnDiscount">0</div></td>
+            </tr>
+            <tr class="totalBill">
+                    <td>Total Dicount</td>
+                    <td colspan="3"><div id="dis">0</div></td>
+            </tr> -->
+        </tfoot>
+    </table>
+    <div> Gross Bill<span id="grossBill"></span></div>
+    <div>Discount<span id="totalDiscount">Discount</span></div>
+    <div> Total Bill<span id="total"></span></div>
+</body>
+<script>
+
+    function calculateBill(a){
+        let dishes = document.querySelectorAll('.dish');
+
+        let totalBill = 0;
+        let discount = 0;
+        let billAfterDiscount = 0;
+
+        dishes.forEach(function(dish){
+            let price = +dish.parentNode.nextElementSibling.innerText;
+            let qty = +dish.parentNode.nextElementSibling.nextElementSibling.querySelector('input').value;
+
+        
+
+            if(dish.checked){
+                totalBill += price * qty ;
+                // discount = ((totalBill/100) * 5);
+                // billAfterDiscount = totalBill - discount;
+                
+            }
+        });
+
+        if(totalBill >= 400){
+            discount = totalBill * 0.10;
+            ;
+        }
+        totalDiscount.innerText = discount
+     
+        grossBill.innerText = totalBill;
+        
+        total.innerText = totalBill - discount;
+
+        console.log(totalBill);
+
+    }
+    document.onkeydown = function(event){
+        if(event.key == 'Enter'){
+            calculateBill();
+        }
+    }
+    
+    // let data = [1,2,3,4,5];
+
+    // function dowork(){
+    //     console.log(item);
+    // }
+    //in forEach() Function we jus print the new values
+    //forEach() just require a function() name
+    // data.forEach(dowork);
+
+    //alternate of this 
+
+//     data.forEach(function(item){
+//         console.log(item * 2);
+//     });
+//      // map() Function will generate a duplicate array 
+
+//      let data1 = [1,2,3,4,5];
+//      let data2 = data.map(function(item){
+//     return item * item;
+// });
+
+</script>
+</html>
